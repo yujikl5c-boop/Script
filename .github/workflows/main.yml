@@ -1,9 +1,9 @@
 name: JD Sign
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:       # 手动运行
   schedule:
-    - cron: "0 16 * * *"
+    - cron: "0 16 * * *"  # 每天 UTC 16 点执行（北京时间 0 点）
 
 jobs:
   jd_sign:
