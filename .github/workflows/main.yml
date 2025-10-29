@@ -1,29 +1,24 @@
 name: JD Sign
 
 on:
-  workflow_dispatch:       # 允许手动运行
+  workflow_dispatch:       # 手动运行
   schedule:
     - cron: "0 16 * * *"   # 每天 UTC 16 点自动运行（北京时间 0 点）
 
 jobs:
-  build:
+  jd_sign:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout codes
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: |
-          npm install
-
       - name: Run JD Sign
-        run: |
-          node jd_bean_sign.js
+        run: node jd_bean_sign.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_USER_AGENT: Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1
